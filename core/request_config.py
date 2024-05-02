@@ -1,3 +1,4 @@
+from typing import Callable
 from core.method import Method
 
 
@@ -10,27 +11,25 @@ class RequestConfig:
 
   @classmethod
   def Get(cls, url: str):
-    def decorator_wrapper(func):
-      print(f'Registering GET method for URL {url}')
-      if url not in cls._mappings[Method.GET]:
-        cls._mappings[Method.GET][url] = func
-      return func
-    return decorator_wrapper
+    return cls._decorator_wrapper(Method.GET, url)
 
   @classmethod
   def Post(cls, url: str):
-    def decorator_wrapper(func):
-      print(f'Registering POST method for URL {url}')
-      if url not in cls._mappings[Method.POST]:
-        cls._mappings[Method.POST][url] = func
-      return func
-    return decorator_wrapper
+    return cls._decorator_wrapper(Method.POST, url)
   
   @classmethod
   def Put(cls, url: str):
-    def decorator_wrapper(func):
-      print(f'Registering PUT method for URL {url}')
-      if url not in cls._mappings[Method.PUT]:
-        cls._mappings[Method.PUT][url] = func
-      return func
-    return decorator_wrapper
+    return cls._decorator_wrapper(Method.PUT, url)
+  
+  @classmethod
+  def _decorator_wrapper(cls, http_method: Method, url: str):
+    return lambda func: cls._register_method(http_method, url, func)
+
+  @classmethod
+  def _register_method(cls, http_method: Method, url: str, func: Callable):
+    print(f'Registering {http_method} for URL {url}')
+    if url not in cls._mappings[Method(http_method)]:
+      cls._mappings[Method(http_method)][url] = func
+    return func
+  
+  

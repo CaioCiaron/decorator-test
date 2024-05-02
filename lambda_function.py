@@ -8,8 +8,8 @@ def lambda_handler(event: HttpEvent):
 print(
   lambda_handler(
     {
-      'httpMethod': 'POST', 
-      'resource': '/pessoas', 
+      'httpMethod': 'GET', 
+      'resource': '/pessoas/{id_pessoa}', 
       'payload': {'nome': 'Pessoa 1', 'descricao': 'Primeira Pessoa'}
     }
   )
