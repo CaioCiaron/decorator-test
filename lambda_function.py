@@ -1,5 +1,6 @@
 from core.http import HttpEvent
 from web import Router
+from paste import httpserver
 
 def lambda_handler(event: HttpEvent):
   router = Router()
@@ -8,9 +9,10 @@ def lambda_handler(event: HttpEvent):
 print(
   lambda_handler(
     {
-      'httpMethod': 'GET', 
-      'resource': '/pessoas/{id_pessoa}', 
-      'payload': {'nome': 'Pessoa 1', 'descricao': 'Primeira Pessoa'}
+      'httpMethod': 'POST', 
+      'resource': '/pessoas', 
+      'payload': {'nome': 'Pessoa 1', 'descricao': 'Primeira Pessoa'},
+      'roles': []
     }
   )
 )
