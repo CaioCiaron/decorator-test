@@ -1,6 +1,5 @@
 from typing import Callable
-from core.http import HttpEvent, HttpResponse
-from core.method import Method
+from core.http import HttpEvent, HttpResponse, Method
 from typing import TypedDict
 
 _EndpointHandler = Callable[[HttpEvent], HttpResponse]

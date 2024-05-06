@@ -1,5 +1,5 @@
-from core import Singleton, Method, RequestConfig
-from core.http import HttpEvent
+from core import Singleton, RequestConfig
+from core.http import HttpEvent, Method
 from core.request_config import EndpointData
 
 
